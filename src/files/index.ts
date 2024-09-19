@@ -31,6 +31,7 @@ export function castRelationshipToClass(
 		case RelationshipType.customProperties:
 			return CustomPropertiesXml.fromArchive(archive, meta.target);
 		case RelationshipType.coreProperties:
+		case RelationshipType.corePropertiesAlternative:
 			return CorePropertiesXml.fromArchive(archive, meta.target);
 		case RelationshipType.endnotes:
 			return EndnotesXml.fromArchive(archive, meta.target);
@@ -66,11 +67,12 @@ export function castRelationshipToClass(
 		case RelationshipType.classificationlabels:
 		case RelationshipType.downRev:
 		case RelationshipType.graphicFrameDoc:
+		case RelationshipType.glossary: 
 			return UnhandledXmlFile.fromArchive(archive, meta.target);
 
 		case RelationshipType.attachedTemplate:
 		default:
 			// Code intelligence should tell you that `meta.type` is `never` by now:
-			throw new Error(`Unhandled relation ship type "${meta.type}"`);
+			throw new Error(`Unhandled relationship type "${meta.type}"`);
 	}
 }
